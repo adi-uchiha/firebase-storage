@@ -13,7 +13,7 @@ import PdfDisplay from "./components/PdfDisplay";
 function App() {
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
-  const [pdfUrls, setPdfUrls] = useState([]);
+  const [pdfUrls, setPdfUrls] = useState(null);
   const [loading ,setLoading] = useState(false)
   const [fileType, setFileType] = useState("")
 
@@ -69,16 +69,16 @@ function App() {
     listAll(pdfListRef).then((response) => {
       response.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
-          setPdfUrls((prev) => [...prev, url]);
+          setPdfUrls(url);
         });
-      });
+      }); 
     });
   }, []);
 
   return (
     <div className="App">
       <input
-        type="file"
+        type="file" 
         onChange={(event) => {
           setImageUpload(event.target.files[0]);
           setFileType(event.target.files[0].type)
@@ -90,9 +90,10 @@ function App() {
         return <img src={url} key={index}/>;
       })}
       <br />
-      <PdfDisplay downloadUrl={pdfUrls[0]}/>
+      {/* {pdfUrls? console.log(true) : console.log(false)} */}
+      {pdfUrls ? <PdfDisplay downloadUrl={pdfUrls}/> : null}   
     </div>
   );
 }
 
-export default App;
+export default App; 

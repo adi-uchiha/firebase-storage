@@ -1,0 +1,33 @@
+.pdf-svg{
+  height: 30px;
+  width: 30px;
+  padding: 5px;
+}
+.download-svg{
+  height: 30px;
+  width: 30px;
+  object-fit: fill;
+  padding: 5px; 
+}
+.download-svg:hover{
+  filter: invert(30%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+  cursor: pointer;
+}
+
+
+/* .pdf-icon{
+  padding: 5px;
+} */
+
+.pdf-display{
+  border: 1.2px solid rgb(77, 77, 77);
+  border-radius: 10px;
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.pdf-name{
+  font-size: 12px;
+}
