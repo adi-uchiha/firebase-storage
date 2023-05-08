@@ -21,8 +21,6 @@ function App() {
   const imagesListRef = ref(storage, "images/");
   const pdfListRef = ref(storage, "pdf/");
 
-
-
   const uploadImage = () => {
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
@@ -52,11 +50,15 @@ function App() {
   }
 
   const upload = () => {
-    if (imageUpload == null) return;
+    if (imageUpload == null){ alert("Please select file"); return}
     setLoading(true)
-    if(fileType === 'image/jpeg'|'image/png'|'image/jpg') {uploadImage()}
-    if(fileType === 'application/pdf') {uploadPdf()}
-    else {alert("File type not supported, Please upload pdf, jpeg, jpg, png only")}
+    if(fileType.startsWith('image')) {
+      uploadImage(); 
+      return
+    } else if(fileType === 'application/pdf') {
+      uploadPdf(); 
+      return
+    } else alert("File type not supported, Please upload pdf, jpeg, jpg, png only")
   }
 
   useEffect(() => {
