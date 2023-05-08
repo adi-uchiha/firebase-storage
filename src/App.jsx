@@ -13,7 +13,7 @@ import PdfDisplay from "./components/PdfDisplay";
 function App() {
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
-  const [pdfUrls, setPdfUrls] = useState(null);
+  const [pdfUrls, setPdfUrls] = useState([]);
   const [loading ,setLoading] = useState(false)
   const [fileType, setFileType] = useState("")
 
@@ -69,7 +69,7 @@ function App() {
     listAll(pdfListRef).then((response) => {
       response.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
-          setPdfUrls(url);
+          setPdfUrls((prev)=> [...prev,url]);
         });
       }); 
     });
@@ -90,8 +90,10 @@ function App() {
         return <img src={url} key={index}/>;
       })}
       <br />
-      {/* {pdfUrls? console.log(true) : console.log(false)} */}
-      {pdfUrls ? <PdfDisplay downloadUrl={pdfUrls}/> : null}   
+      {pdfUrls.map((url, index) => {
+        return <PdfDisplay downloadUrl={url} key={index}/>;
+      })}
+
     </div>
   );
 }

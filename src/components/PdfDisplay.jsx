@@ -1,7 +1,7 @@
 import './PdfDisplay.css'
 
 const PdfDisplay = (props) => {
-  // console.log(props.downloadUrl)
+  console.log(props.downloadUrl)
   const firebaseUrl = props?.downloadUrl
   const regex = /%2F(.*?)\.pdf/;
   const match = regex.exec(firebaseUrl);
@@ -14,7 +14,7 @@ const PdfDisplay = (props) => {
     <div className='pdf-icon'>
       <img className='pdf-svg' src='src/assets/pdficon.svg'></img>
     </div>
-    <div className="pdf-name">NAME</div>
+    <div className="pdf-name">{fileName}</div>
     <div className="download-icon">
     <a href={firebaseUrl} download="Exam form" target="_blank" rel="noreferrer">
       <img className='download-svg' src='src/assets/cloud-download-icon.svg'></img>

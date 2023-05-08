@@ -22,7 +22,8 @@
 .pdf-display{
   border: 1.2px solid rgb(77, 77, 77);
   border-radius: 10px;
-  width: 200px;
+  width: auto;
+  margin: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
