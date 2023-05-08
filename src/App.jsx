@@ -20,6 +20,7 @@ function App() {
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setImageUrls((prev) => [...prev, url]);
+        window.alert("Success")
       });
     });
   };
@@ -45,7 +46,7 @@ function App() {
       <button onClick={uploadFile}> Upload Image</button>
       <br />
       {imageUrls.map((url) => {
-        return <img height="400" width="200" src={url} key={url}/>;
+        return <img src={url} key={url}/>;
       })}
     </div>
   );
