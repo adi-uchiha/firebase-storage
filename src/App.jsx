@@ -15,6 +15,7 @@ function App() {
   const [imageUrls, setImageUrls] = useState([]);
   const [pdfUrls, setPdfUrls] = useState([]);
   const [loading ,setLoading] = useState(false)
+  const [fileList, setFileList] = useState([] )
   const [fileType, setFileType] = useState("")
 
   const imagesListRef = ref(storage, "images/");
@@ -31,6 +32,7 @@ function App() {
         setLoading(false);
         setImageUpload("")
         window.alert("Success")
+        window.location.reload()
       });
     });
   };
@@ -44,6 +46,7 @@ function App() {
         setLoading(false);
         setImageUpload("")
         window.alert("Success")
+        window.location.reload()
       });
     });
   }
@@ -68,6 +71,7 @@ function App() {
     // fetch pdfs
     listAll(pdfListRef).then((response) => {
       response.items.forEach((item) => {
+        setFileList((prev)=>[...prev, item])
         getDownloadURL(item).then((url) => {
           setPdfUrls((prev)=> [...prev,url]);
         });
@@ -84,14 +88,14 @@ function App() {
           setFileType(event.target.files[0].type)
         }}
       />
-      <button onClick={upload}>{loading ? "Loading": "Upload Image"}</button>
+      <button onClick={upload}>{loading ? "Loading": "Upload"}</button>
       <br />
       {imageUrls.map((url, index) => {
         return <img src={url} key={index}/>;
       })}
       <br />
       {pdfUrls.map((url, index) => {
-        return <PdfDisplay downloadUrl={url} key={index}/>;
+        return <PdfDisplay downloadUrl={url} fileRef={fileList[0]} key={index}/>;
       })}
 
     </div>

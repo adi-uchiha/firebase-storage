@@ -9,6 +9,19 @@
   object-fit: fill;
   padding: 5px; 
 }
+.delete-svg{
+  height: 30px;
+  width: 30px;
+  object-fit: fill;
+  padding: 5px; 
+}
+.delete-svg:hover{
+  filter: invert(22%) sepia(55%) saturate(6892%) hue-rotate(351deg) brightness(92%) contrast(108%);
+  cursor: pointer;
+}
+.delete{
+  font-size: 0.8rem;
+}
 .download-svg:hover{
   filter: invert(30%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
   cursor: pointer;
@@ -23,11 +36,13 @@
   border: 1.2px solid rgb(77, 77, 77);
   border-radius: 10px;
   width: auto;
+  max-width: 800px;
   margin: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  
 }
 .pdf-name{
   font-size: 12px;
