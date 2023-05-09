@@ -35,7 +35,7 @@ const DocDisplay = (props) => {
       {loading ? "loading..." : <img onClick={handleDelete} className='delete-svg' src='/delete.svg'></img>}
     </div>
     <div className="download-icon">
-    <a href={firebaseUrl} download="" target="_blank" rel="noreferrer">
+    <a href={firebaseUrl} download={fileName}>
       <img className='download-svg' src='/cloud-download-icon.svg'></img>
     </a>
     </div>

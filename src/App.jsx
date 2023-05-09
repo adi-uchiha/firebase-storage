@@ -59,7 +59,7 @@ function App() {
   }
 
   const uploadDoc = () => {
-    const imageRef = ref(storage, `doc/${imageUpload.name + v4()}`);
+    const imageRef = ref(storage, `doc/${imageUpload.name + v4() + '.doc'}`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         console.log(url)
