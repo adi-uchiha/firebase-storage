@@ -10,6 +10,7 @@ import { storage } from "./firebase";
 import { v4 } from "uuid";
 import PdfDisplay from "./components/PdfDisplay";
 import DocDisplay from "./components/DocDisplay";
+import ImgDisplay from "./components/ImgDisplay";
 
 function App() {
   // Upload State
@@ -20,8 +21,9 @@ function App() {
   const [docUrls, setDocUrls] = useState([]);
   const [loading ,setLoading] = useState(false)
   // Ref state for delete function
-  const [docFileRefList, setDocFileRefList] = useState([] )
-  const [pdfFileRefList, setPdfFileRefList] = useState([] )
+  const [docFileRefList, setDocFileRefList] = useState([])
+  const [pdfFileRefList, setPdfFileRefList] = useState([])
+  const [imgFileRefList, setImgFileRefList] = useState([])
 
   // Validate file type in frontend
   const [fileType, setFileType] = useState("")
@@ -34,7 +36,6 @@ function App() {
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        console.log(url)
         setImageUrls((prev) => [...prev, url]);
         setLoading(false);
         setImageUpload("")
@@ -48,7 +49,6 @@ function App() {
     const imageRef = ref(storage, `pdf/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        console.log(url)
         setImageUrls((prev) => [...prev, url]);
         setLoading(false);
         setImageUpload("")
@@ -62,7 +62,6 @@ function App() {
     const imageRef = ref(storage, `doc/${imageUpload.name + v4() + '.doc'}`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        console.log(url)
         setImageUrls((prev) => [...prev, url]);
         setLoading(false);
         setImageUpload("") 
@@ -92,6 +91,7 @@ function App() {
   useEffect(() => {
     listAll(imagesListRef).then((response) => {
       response.items.forEach((item) => {
+        setImgFileRefList((prev)=>[...prev, item])
         getDownloadURL(item).then((url) => {
           setImageUrls((prev) => [...prev, url]);
         });
@@ -101,8 +101,7 @@ function App() {
     // fetch pdfs
     listAll(pdfListRef).then((response) => {
       response.items.forEach((item) => {
-        //This for delete function
-        // setFileList((prev)=>[...prev, item]) 
+        setPdfFileRefList((prev)=>[...prev, item]) 
         getDownloadURL(item).then((url) => {
           setPdfUrls((prev)=> [...prev,url]);
         });
@@ -132,15 +131,15 @@ function App() {
       <button onClick={upload}>{loading ? "Loading": "Upload"}</button>
       <br />
       {docUrls.map((url, index) => {
-        return <DocDisplay downloadUrl={url} fileRef={docFileRefList[0]} key={index}/>;
+        return <DocDisplay downloadUrl={url} fileRef={docFileRefList[index]} key={index}/>;
       })}
       <br />
       {imageUrls.map((url, index) => {
-        return <img src={url} key={index}/>;
+        return <ImgDisplay downloadUrl={url} fileRef={imgFileRefList[index]} key={index}/>
       })}
       <br />
       {pdfUrls.map((url, index) => {
-        return <PdfDisplay downloadUrl={url} fileRef={docFileRefList[0]} key={index}/>;
+        return <PdfDisplay downloadUrl={url} fileRef={pdfFileRefList[index]} key={index}/>;
       })}
 
     </div>
