@@ -3,7 +3,6 @@ import './PdfDisplay.css'
 import { useState } from 'react'
 
 const DocDisplay = (props) => {
-  console.log(props)
 
   const [loading, setLoading] = useState(false)
 

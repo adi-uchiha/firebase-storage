@@ -18,13 +18,13 @@ const ImgDisplay = (props) => {
   return <>
   <div className='pdf-display'> 
     <div className='pdf-icon'>
-      <img className='img' width="500" height="600" src={props.downloadUrl}></img>
+      <img className='img' loading='lazy' width="500" height="600" src={props.downloadUrl}></img>
     </div>
 
     <div className="pdf-name">Img</div>
 
     <div onClick={handleDelete} className="delete">
-      {loading ? "loading..." : <img onClick={handleDelete} className='delete-svg' src='/delete.svg'></img>}
+      {loading ? "loading" : <img onClick={handleDelete} className='delete-svg' src='/delete.svg'></img>}
     </div>
     <div className="download-icon">
     <a href={props.downloadUrl} >
