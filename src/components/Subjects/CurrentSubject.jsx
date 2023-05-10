@@ -7,8 +7,7 @@ import { storage } from "../../firebase";
 
 const CurrentSubject = ({subject, newFileCount}) => {
   console.log(subject, newFileCount)
-  let trigger = newFileCount
-  let subjectTrigger = subject
+
     // Ref state for delete function
   const [docFileRefList, setDocFileRefList] = useState([])
   const [pdfFileRefList, setPdfFileRefList] = useState([])
@@ -62,12 +61,12 @@ const CurrentSubject = ({subject, newFileCount}) => {
         return <DocDisplay downloadUrl={url} fileRef={docFileRefList[index]} key={index} />;
       })}
       <br />
-      {imageUrls.map((url, index) => {
-        return <ImgDisplay downloadUrl={url} fileRef={imgFileRefList[index]} key={index} />
-      })}
-      <br />
       {pdfUrls.map((url, index) => {
         return <PdfDisplay downloadUrl={url} fileRef={pdfFileRefList[index]} key={index} />;
+      })}
+      <br />
+      {imageUrls.map((url, index) => {
+        return <ImgDisplay downloadUrl={url} fileRef={imgFileRefList[index]} key={index} />
       })}
   </div>
 }

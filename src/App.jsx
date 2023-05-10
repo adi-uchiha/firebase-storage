@@ -3,7 +3,6 @@ import { useState } from "react";
 import {
   ref,
   uploadBytes,
-  getDownloadURL,
 } from "firebase/storage";
 import { storage } from "./firebase";
 import { v4 } from "uuid";
@@ -27,43 +26,48 @@ function App() {
 
   const uploadImage = () => {
     const imageRef = ref(storage, `${uploadSubject}/images/${imageUpload.name + v4()}`);
-    uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        // setImageUrls((prev) => [...prev, url]);
-        setLoading(false);
-        setImageUpload("")
-        window.alert("Success")
-        setNewFileCount(newFileCount + 1)
-        // window.location.reload()
-      });
+    uploadBytes(imageRef, imageUpload).then(() => {
+      setLoading(false)
+      setImageUpload("")
+      window.alert("Success")
+      setNewFileCount(newFileCount+1)
+      // getDownloadURL(snapshot.ref).then((url) => {
+      //   // setImageUrls((prev) => [...prev, url]);
+      //   setLoading(false);
+      //   setImageUpload("")
+      //   window.alert("Success")
+      //   setNewFileCount(newFileCount + 1)
+      //   // window.location.reload()
+      // });
     });
   };
 
   const uploadPdf = () => {
     const imageRef = ref(storage, `${uploadSubject}/pdf/${imageUpload.name + v4()}`);
-    uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        setImageUrls((prev) => [...prev, url]);
-        setLoading(false);
-        setImageUpload("")
-        window.alert("Success")
-        window.location.reload()
-      });
+    uploadBytes(imageRef, imageUpload).then(() => {
+      setLoading(false);
+      setImageUpload("")
+      window.alert("Success")
+      setNewFileCount(newFileCount+1)
+
+
+      // getDownloadURL(snapshot.ref).then((url) => {
+      //   setImageUrls((prev) => [...prev, url]);
+
+      // });
     });
   }
 
   const uploadDoc = () => {
     const imageRef = ref(storage, `${uploadSubject}/doc/${imageUpload.name + v4() + '.doc'}`);
-    uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        setImageUrls((prev) => [...prev, url]);
-        setLoading(false);
-        setImageUpload("")
-        window.alert("Success")
-        window.location.reload()
-      });
+    uploadBytes(imageRef, imageUpload).then(() => {
+      setImageUpload("")
+      setLoading(false)
+      window.alert("Success")
+      setNewFileCount(newFileCount+1)
+
     });
-  }
+  } 
 
 
   const upload = () => {
