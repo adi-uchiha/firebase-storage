@@ -7,6 +7,7 @@ import {
 import { storage } from "./firebase";
 import { v4 } from "uuid";
 import CurrentSubject from "./components/Subjects/CurrentSubject";
+import MyDropdown from "./components/ui/DropDown";
 
 
 function App() {
@@ -108,7 +109,8 @@ function App() {
       </select>
 
       <br />
-        <CurrentSubject subject={uploadSubject} newFileCount={newFileCount}/>
+      <MyDropdown />
+        {/* <CurrentSubject subject={uploadSubject} newFileCount={newFileCount}/> */}
     </div>
   );
 }
